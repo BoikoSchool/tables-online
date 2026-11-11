@@ -1,0 +1,887 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Таблиці на GitHub Pages</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: Apple-style product page — frosted sticky subnav, alternating full-bleed bands, centered 980px column, soft cards */
+:root{
+  --bg:#ffffff; --bg-alt:#f5f5f7; --card:#ffffff; --card-alt:#fbfbfd;
+  --fg:#1d1d1f; --fg-2:#6e6e73; --line:#d2d2d7;
+  --accent:#0071e3; --accent-ink:#ffffff; --accent-soft:#e8f2fd;
+  --ok:#1a7f37; --ok-soft:#e6f4ea; --bad:#c9341f; --bad-soft:#fdecea;
+  --code-bg:#1d1d1f; --code-fg:#f5f5f7; --c-tag:#ff7ab2; --c-attr:#ffa14f; --c-val:#9cdcfe; --c-com:#8e8e93;
+  --nav:rgba(251,251,253,.8);
+  --f-display:"SF Pro Display",-apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --f-text:"SF Pro Text",-apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --f-mono:"SF Mono",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#000000; --bg-alt:#111113; --card:#1c1c1e; --card-alt:#232326;
+  --fg:#f5f5f7; --fg-2:#a1a1a6; --line:#38383d;
+  --accent:#2997ff; --accent-ink:#000000; --accent-soft:#0d2a47;
+  --ok:#4cd964; --ok-soft:#0f2e17; --bad:#ff6b5a; --bad-soft:#3a1511;
+  --code-bg:#0b0b0c; --nav:rgba(22,22,23,.8); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#000000; --bg-alt:#111113; --card:#1c1c1e; --card-alt:#232326;
+  --fg:#f5f5f7; --fg-2:#a1a1a6; --line:#38383d;
+  --accent:#2997ff; --accent-ink:#000000; --accent-soft:#0d2a47;
+  --ok:#4cd964; --ok-soft:#0f2e17; --bad:#ff6b5a; --bad-soft:#3a1511;
+  --code-bg:#0b0b0c; --nav:rgba(22,22,23,.8); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-text);font-size:17px;line-height:1.47;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--nav)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.025em}
+p{margin:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.wrap{max-width:980px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+.band{padding-block:88px}
+.band.alt{background:var(--bg-alt)}
+.stack{display:grid;gap:24px}
+
+/* subnav */
+.subnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--nav);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.subnav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:52px}
+.subnav b{font-family:var(--f-display);font-size:20px;font-weight:600;letter-spacing:-.02em;white-space:nowrap}
+.subnav nav{display:flex;gap:20px;overflow-x:auto;scrollbar-width:none}
+.subnav nav a{color:var(--fg);font-size:13px;white-space:nowrap;opacity:.85}
+.subnav nav a:hover{opacity:1;text-decoration:none;color:var(--accent)}
+@media (max-width:560px){.subnav b{display:none}.subnav .wrap{justify-content:flex-start}}
+
+/* hero */
+.hero{padding-block:96px 72px;text-align:center}
+.eyebrow{font-size:14px;font-weight:600;color:var(--accent);letter-spacing:.01em}
+.hero h1{font-size:clamp(56px,11vw,96px);font-weight:700;line-height:1.02;margin-top:10px}
+.hero .lead{font-size:clamp(21px,3vw,28px);line-height:1.25;font-weight:500;color:var(--fg-2);max-width:640px;margin:18px auto 0;letter-spacing:-.02em}
+.journey{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:56px;text-align:left}
+.journey a{display:grid;gap:4px;padding:18px 18px 20px;background:var(--bg-alt);border-radius:18px;color:var(--fg)}
+.journey a:hover{text-decoration:none;background:var(--accent-soft)}
+.journey small{font-size:12px;font-weight:600;color:var(--fg-2);text-transform:uppercase;letter-spacing:.06em}
+.journey strong{font-family:var(--f-display);font-size:19px;font-weight:600}
+.journey span{font-size:14px;color:var(--fg-2)}
+@media (max-width:760px){.journey{grid-template-columns:repeat(2,1fr)}}
+
+/* section heads */
+.shead{display:grid;gap:12px;margin-bottom:48px;max-width:720px}
+.shead h2{font-size:clamp(36px,6vw,56px);font-weight:700;line-height:1.05}
+.shead p{font-size:21px;color:var(--fg-2);line-height:1.38}
+h3{font-size:24px;font-weight:600;line-height:1.2}
+.muted{color:var(--fg-2)}
+.small{font-size:14px}
+
+/* setup steps */
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;counter-reset:s;list-style:none;margin:0;padding:0}
+.steps li{counter-increment:s;background:var(--card);border-radius:18px;padding:24px;display:grid;gap:6px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--f-display);font-size:15px;font-weight:600;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);margin-bottom:6px}
+.steps strong{font-size:19px;font-family:var(--f-display);font-weight:600}
+@media (max-width:700px){.steps{grid-template-columns:1fr}}
+kbd{font-family:var(--f-mono);font-size:.85em;padding:1px 7px;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;background:var(--card-alt);white-space:nowrap}
+code.i{font-family:var(--f-mono);font-size:.88em;padding:1px 6px;border-radius:6px;background:var(--accent-soft);color:var(--fg)}
+
+/* tags anatomy */
+.anatomy{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px}
+.tag{background:var(--bg-alt);border-radius:18px;padding:24px;display:grid;gap:6px}
+.tag .t{font-family:var(--f-mono);font-size:34px;font-weight:600;color:var(--accent);letter-spacing:-.02em}
+.tag b{font-size:15px}
+@media (max-width:700px){.anatomy{grid-template-columns:1fr}}
+
+/* example card: code + result */
+.ex{display:grid;grid-template-columns:1.15fr 1fr;border-radius:22px;overflow:hidden;background:var(--bg-alt)}
+.ex+.ex{margin-top:20px}
+.ex .info{grid-column:1/-1;padding:28px 28px 0;display:grid;gap:8px}
+.ex .info p{max-width:62ch}
+.ex .code,.ex .out{min-width:0;padding:20px 28px 28px}
+.label{font-size:12px;font-weight:600;color:var(--fg-2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+pre{margin:0;background:var(--code-bg);color:var(--code-fg);font-family:var(--f-mono);font-size:14px;line-height:1.6;padding:18px 20px;border-radius:14px;overflow-x:auto;tab-size:2}
+.tk{color:var(--c-tag)} .ta{color:var(--c-attr)} .tv{color:var(--c-val)} .tc{color:var(--c-com);font-style:italic}
+.render{background:var(--card);border-radius:14px;padding:16px 20px;font-family:"Times New Roman",Times,serif;font-size:17px;line-height:1.45;color:var(--fg);min-height:100%}
+.render ul,.render ol{margin:.3em 0;padding-left:1.6em}
+.render h1{font-size:28px;font-family:inherit;margin:.2em 0 .4em}
+.render h2{font-size:21px;font-family:inherit;margin:.8em 0 .3em}
+.render p{margin:.4em 0}
+@media (max-width:760px){.ex{grid-template-columns:1fr}.ex .code{padding-bottom:8px}}
+
+/* note */
+.note{display:grid;gap:6px;padding:20px 24px;border-radius:18px;background:var(--accent-soft)}
+.note b{font-family:var(--f-display);font-size:17px}
+.warn{background:var(--bad-soft)}
+.warn b{color:var(--bad)}
+
+table{border-collapse:collapse;width:100%;font-size:15px}
+.tbl{overflow-x:auto;background:var(--card);border-radius:18px;padding:8px 20px}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-2);font-weight:600}
+td code{font-family:var(--f-mono);font-size:14px}
+
+/* practice */
+.tabs{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:var(--card);border:1px solid var(--line);flex-wrap:wrap}
+.tabs button{font:inherit;font-size:14px;font-weight:500;border:0;background:transparent;color:var(--fg);padding:8px 16px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--fg);color:var(--bg)}
+.task{background:var(--card);border-radius:22px;padding:28px;display:grid;gap:20px}
+.task-head{display:grid;gap:8px}
+.task-head ol{margin:0;padding-left:1.3em;display:grid;gap:4px;color:var(--fg)}
+.play{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.play>div{min-width:0}
+textarea{width:100%;min-height:300px;resize:vertical;background:var(--code-bg);color:var(--code-fg);font-family:var(--f-mono);font-size:14px;line-height:1.6;border:0;border-radius:14px;padding:18px 20px;tab-size:2}
+.play .render{border:1px solid var(--line);min-height:300px}
+@media (max-width:760px){.play{grid-template-columns:1fr}textarea,.play .render{min-height:220px}}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{font:inherit;font-size:15px;font-weight:500;border:0;border-radius:999px;padding:11px 22px;cursor:pointer;background:var(--accent);color:var(--accent-ink)}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.checks li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.checks .dot{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--bg-alt);color:var(--fg-2);margin-top:1px}
+.checks .yes .dot{background:var(--ok);color:#fff}
+.checks .no .dot{background:var(--bad);color:#fff}
+.emmet{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.emmet div{background:var(--card);border-radius:16px;padding:18px 20px;display:grid;gap:4px}
+.emmet code{font-family:var(--f-mono);font-size:17px;font-weight:600;color:var(--accent)}
+@media (max-width:700px){.emmet{grid-template-columns:1fr}}
+
+/* assignment */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.two>*{min-width:0}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.panel{background:var(--bg-alt);border-radius:22px;padding:28px;display:grid;gap:16px}
+.copyrow{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.todo{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.todo label{display:flex;gap:12px;align-items:flex-start;padding:10px 4px;cursor:pointer;font-size:16px;border-bottom:1px solid var(--line)}
+.todo li:last-child label{border-bottom:0}
+.todo input{width:20px;height:20px;accent-color:var(--accent);flex:none;margin-top:2px}
+.progress{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.grade td:last-child{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+
+/* quiz */
+.quiz{display:grid;gap:16px;counter-reset:q}
+.q{counter-increment:q;background:var(--card);border-radius:20px;padding:24px 24px 20px;display:grid;gap:14px;border:0;margin:0;min-width:0}
+.q legend{font-family:var(--f-display);font-size:19px;font-weight:600;line-height:1.3;padding:0;display:contents}
+.q .qt{font-family:var(--f-display);font-size:19px;font-weight:600;line-height:1.3}
+.q .qt::before{content:counter(q) ". ";color:var(--fg-2)}
+.q pre{font-size:13px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:600px){.opts{grid-template-columns:1fr}}
+.opts label{display:flex;gap:10px;align-items:center;padding:12px 14px;border-radius:12px;background:var(--bg-alt);cursor:pointer;font-size:15px;border:2px solid transparent;min-width:0}
+.opts label:hover{border-color:var(--line)}
+.opts input{accent-color:var(--accent);flex:none}
+.opts label:has(input:checked){border-color:var(--accent)}
+.opts code{font-family:var(--f-mono);font-size:14px}
+.q.done .opts label.right{border-color:var(--ok);background:var(--ok-soft)}
+.q.done .opts label.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.q .why{display:none;font-size:15px;color:var(--fg-2)}
+.q.done .why{display:block}
+.score{display:grid;gap:8px;text-align:center;padding:40px 24px;border-radius:22px;background:var(--card)}
+.score .big{font-family:var(--f-display);font-size:72px;font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+footer{padding-block:32px;font-size:12px;color:var(--fg-2);border-top:1px solid var(--line)}
+</style>
+<style>
+/* additions for the GitHub edition */
+.commit{display:grid;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.commit .row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:14px;color:var(--fg-2)}
+.commit .pill{font-family:var(--f-mono);font-size:13px;padding:3px 10px;border-radius:999px;background:var(--bg-alt);color:var(--fg)}
+.commit .msg{font-family:var(--f-mono);font-size:15px;padding:10px 14px;border-radius:10px;background:var(--bg-alt);border:1px solid var(--line);color:var(--fg);overflow-wrap:anywhere}
+.commit .go{justify-self:start;font-size:14px;font-weight:600;padding:7px 16px;border-radius:8px;background:var(--ok);color:#fff}
+.ex .commit{margin:0 28px 28px}
+@media (max-width:760px){.ex .commit{margin:0 20px 20px}}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:760px){.flow{grid-template-columns:1fr}}
+.url{font-family:var(--f-mono);font-size:clamp(14px,2.4vw,19px);padding:16px 20px;border-radius:14px;background:var(--card);border:1px solid var(--line);overflow-wrap:anywhere}
+.url b{color:var(--accent);font-weight:600}
+.path{font-family:var(--f-mono);font-size:.88em}
+.anatomy.four{grid-template-columns:repeat(4,1fr)}
+@media (max-width:820px){.anatomy.four{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:440px){.anatomy.four{grid-template-columns:1fr}}
+.quiz .q{background:var(--bg-alt)}
+.quiz .opts label{background:var(--card)}
+.when{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px}
+@media (max-width:700px){.when{grid-template-columns:1fr}}
+.when div{border-radius:18px;padding:22px 24px;display:grid;gap:8px;background:var(--card)}
+.when ul{margin:0;padding-left:1.2em;display:grid;gap:2px;color:var(--fg-2);font-size:15px}
+.when .yes b{color:var(--ok)} .when .no b{color:var(--bad)}
+
+/* how student tables look on their site (mirrors the <style> block in the template) */
+.render{overflow-x:auto}
+.ex.wide{grid-template-columns:1fr}
+.ex.wide .code{padding-bottom:8px}
+.render table{border-collapse:collapse;width:auto;font-size:16px;margin:.4em 0}
+.render table th,.render table td{border:1px solid var(--fg-2);padding:6px 10px;text-align:left;vertical-align:middle}
+.render table th{background:var(--line);font-size:inherit;text-transform:none;letter-spacing:0;color:var(--fg);font-weight:700}
+.render caption{font-weight:700;padding-bottom:6px;text-align:left}
+.render tfoot td,.render tfoot th{font-weight:700}
+</style>
+
+<div class="subnav">
+  <div class="wrap">
+    <b>Таблиці на GitHub</b>
+    <nav aria-label="Етапи уроку">
+      <a href="#start">Підготовка</a>
+      <a href="#learn">Знайомство</a>
+      <a href="#practice">Практика</a>
+      <a href="#task">Завдання</a>
+      <a href="#quiz">Тест</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Урок HTML · Планшет · GitHub Pages · 45 хвилин</p>
+    <h1>Таблиці.</h1>
+    <p class="lead">Рядки, стовпці, заголовки та об'єднані комірки. Пишемо код у браузері, зберігаємо комітами і публікуємо на своєму сайті.</p>
+    <div class="journey">
+      <a href="#learn"><small>Етап 1</small><strong>Знайомство</strong><span>Приклад разом із комітами</span></a>
+      <a href="#practice"><small>Етап 2</small><strong>Практика</strong><span>3 вправи, 3 коміти</span></a>
+      <a href="#task"><small>Етап 3</small><strong>Розклад</strong><span>Самостійно на GitHub Pages</span></a>
+      <a href="#quiz"><small>Фініш</small><strong>Тест</strong><span>10 питань</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ПІДГОТОВКА -->
+<section id="start" class="band alt">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Перед початком</p>
+      <h2>Створи репозиторій tables.</h2>
+      <p>Для кожної теми у нас окремий репозиторій. Цей урок живе в репозиторії <code class="i">tables</code>.</p>
+    </div>
+    <ol class="steps">
+      <li><strong>Увійди в GitHub</strong><p class="muted">Відкрий <a href="https://github.com" target="_blank" rel="noopener">github.com</a> у браузері (Safari або Chrome, не в застосунку GitHub) і увійди у свій акаунт.</p></li>
+      <li><strong>Новий репозиторій</strong><p class="muted">Натисни <kbd>+</kbd> вгорі праворуч → <kbd>New repository</kbd>. У полі <b>Repository name</b> напиши <code class="i">tables</code>.</p></li>
+      <li><strong>Налаштуй і створи</strong><p class="muted">Обери <kbd>Public</kbd> і постав галочку <kbd>Add a README file</kbd>. Натисни зелену кнопку <kbd>Create repository</kbd>.</p></li>
+      <li><strong>Увімкни GitHub Pages</strong><p class="muted"><kbd>Settings</kbd> → ліворуч <kbd>Pages</kbd>. У <b>Branch</b> обери <kbd>main</kbd> і <kbd>/ (root)</kbd> → <kbd>Save</kbd>.</p></li>
+    </ol>
+    <div class="stack" style="margin-top:32px">
+      <p class="muted">За 1–2 хвилини твій сайт з'явиться за адресою:</p>
+      <div class="url">https://<b>твій-логін</b>.github.io/tables/</div>
+    </div>
+
+    <div class="stack" style="margin-top:48px">
+      <h3>Нагадування: як зробити коміт</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Що потрібно</th><th>Куди натиснути</th></tr></thead>
+          <tbody>
+            <tr><td>Створити новий файл</td><td><kbd>Add file</kbd> → <kbd>Create new file</kbd> → ввести назву файлу</td></tr>
+            <tr><td>Змінити наявний файл</td><td>Відкрити файл → іконка олівця ✎ (<b>Edit this file</b>)</td></tr>
+            <tr><td>Зберегти зміни</td><td>Зелена кнопка <kbd>Commit changes…</kbd> → написати підпис → <kbd>Commit changes</kbd></td></tr>
+            <tr><td>Подивитися історію</td><td>На головній сторінці репозиторію натиснути <kbd>Commits</kbd></td></tr>
+            <tr><td>Перевірити, чи оновився сайт</td><td>Вкладка <kbd>Actions</kbd>: зелена галочка ✓ означає, що сайт оновлено</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><b>Порада для планшета</b><p>Тримай планшет горизонтально, бо таблиці широкі. Знаки <code class="i">&lt;</code> <code class="i">&gt;</code> <code class="i">/</code> <code class="i">"</code> на екранній клавіатурі ховаються за кнопкою <kbd>123</kbd> → <kbd>#+=</kbd>.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ЕТАП 1 -->
+<section id="learn" class="band">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Етап 1 · Знайомство з прикладом</p>
+      <h2>Дані в рядках і стовпцях.</h2>
+      <p>Таблиця потрібна, коли дані зручно порівнювати: хто, що, скільки, коли. Набирай кожен приклад у своєму репозиторії і зберігай комітом.</p>
+    </div>
+
+    <div class="when">
+      <div class="yes"><b>Таблиця підходить</b><ul><li>Розклад уроків</li><li>Оцінки за чверть</li><li>Порівняння цін</li><li>Результати змагань</li></ul></div>
+      <div class="no"><b>Таблиця не підходить</b><ul><li>Розташувати меню і текст поруч</li><li>Зробити колонки на сайті</li><li>Вирівняти картинки</li><li>Для цього є CSS, ми його ще вивчимо</li></ul></div>
+    </div>
+
+    <div class="anatomy four">
+      <div class="tag"><span class="t">&lt;table&gt;</span><b>table</b><p class="muted small">Уся таблиця. Усередині неї лежать рядки.</p></div>
+      <div class="tag"><span class="t">&lt;tr&gt;</span><b>table row</b><p class="muted small">Один рядок. Усередині лежать комірки.</p></div>
+      <div class="tag"><span class="t">&lt;th&gt;</span><b>table header</b><p class="muted small">Комірка-заголовок. Браузер робить текст жирним.</p></div>
+      <div class="tag"><span class="t">&lt;td&gt;</span><b>table data</b><p class="muted small">Звичайна комірка з даними.</p></div>
+    </div>
+
+    <div class="stack" style="margin-bottom:24px">
+      <h3>Крок 0. Створи файл index.html</h3>
+      <p class="muted"><kbd>Add file</kbd> → <kbd>Create new file</kbd> → назва <code class="i">index.html</code>. Встав каркас і зроби перший коміт. Блок <code class="i">&lt;style&gt;</code> малює лінії таблиці. Без нього таблиця виглядатиме як текст без рамок. Усі приклади нижче дописуй всередину <code class="i">&lt;body&gt;</code>.</p>
+    </div>
+    <article class="ex">
+      <div class="info"><h3>Каркас сторінки з рамками</h3><p class="muted">Скопіюй кнопкою і встав у файл.</p></div>
+      <div class="code" style="grid-column:1/-1"><div class="copyrow"><p class="label">Код файлу index.html</p><button class="btn ghost copy" data-copy="base" style="padding:7px 16px;font-size:14px">Скопіювати</button></div><pre data-src="base"></pre></div>
+      <div class="commit" style="grid-column:1/-1"><div class="row"><span>Файл</span><span class="pill">index.html</span><span>Коміт №1</span></div><div class="msg">Створено сторінку index.html</div></div>
+    </article>
+
+    <article class="ex">
+      <div class="info"><h3>Базова таблиця</h3><p class="muted">Таблицю будуємо рядок за рядком. Кожен <code class="i">&lt;tr&gt;</code> — рядок, кожен <code class="i">&lt;td&gt;</code> у ньому — комірка. Перший рядок робимо з <code class="i">&lt;th&gt;</code>, це заголовки стовпців.</p></div>
+      <div class="code"><p class="label">Допиши в body</p><pre data-src="ex1"></pre></div>
+      <div class="out"><p class="label">Результат на сайті</p><div class="render" data-render="ex1"></div></div>
+      <div class="commit" style="grid-column:1/-1"><div class="row"><span>Файл</span><span class="pill">index.html</span><span>Коміт №2</span></div><div class="msg">Додано базову таблицю</div></div>
+    </article>
+
+    <article class="ex">
+      <div class="info"><h3>Структура таблиці</h3><p class="muted"><code class="i">&lt;caption&gt;</code> — назва таблиці, пишеться першою. <code class="i">&lt;thead&gt;</code> — шапка, <code class="i">&lt;tbody&gt;</code> — основні дані, <code class="i">&lt;tfoot&gt;</code> — підсумок. Назва допомагає і людям, і програмам, що читають сторінку вголос.</p></div>
+      <div class="code"><p class="label">Допиши в body</p><pre data-src="ex2"></pre></div>
+      <div class="out"><p class="label">Результат на сайті</p><div class="render" data-render="ex2"></div></div>
+      <div class="commit" style="grid-column:1/-1"><div class="row"><span>Файл</span><span class="pill">index.html</span><span>Коміт №3</span></div><div class="msg">Додано структуру таблиці</div></div>
+    </article>
+
+    <article class="ex">
+      <div class="info"><h3>Об'єднання комірок</h3><p class="muted"><code class="i">colspan="3"</code> розтягує комірку на 3 стовпці вправо. <code class="i">rowspan="2"</code> розтягує комірку на 2 рядки вниз. У наступному рядку цю комірку вже не пишемо, бо її місце зайняте.</p></div>
+      <div class="code"><p class="label">Допиши в body</p><pre data-src="ex3"></pre></div>
+      <div class="out"><p class="label">Результат на сайті</p><div class="render" data-render="ex3"></div></div>
+      <div class="commit" style="grid-column:1/-1"><div class="row"><span>Файл</span><span class="pill">index.html</span><span>Коміт №4</span></div><div class="msg">Додано об'єднання комірок</div></div>
+    </article>
+
+    <article class="ex">
+      <div class="info"><h3>Заголовки зі scope</h3><p class="muted">Атрибут <code class="i">scope</code> підказує, до чого належить заголовок: <code class="i">scope="col"</code> — до стовпця, <code class="i">scope="row"</code> — до рядка. На вигляд нічого не змінюється, але програми для незрячих людей читають таку таблицю правильно.</p></div>
+      <div class="code"><p class="label">Допиши в body</p><pre data-src="ex4"></pre></div>
+      <div class="out"><p class="label">Результат на сайті</p><div class="render" data-render="ex4"></div></div>
+      <div class="commit" style="grid-column:1/-1"><div class="row"><span>Файл</span><span class="pill">index.html</span><span>Коміт №5</span></div><div class="msg">Додано scope для заголовків</div></div>
+    </article>
+
+    <div class="stack" style="margin-top:32px">
+      <div class="note"><b>Перевір себе</b><p>Відкрий <span class="path">https://твій-логін.github.io/tables/</span>. Там мають бути чотири таблиці з рамками. Якщо сайт ще старий, зачекай хвилину й онови сторінку. А в <kbd>Commits</kbd> має бути 5 нових комітів.</p></div>
+    </div>
+
+    <div class="stack" style="margin-top:48px">
+      <h3>Шпаргалка</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Тег або атрибут</th><th>Що робить</th></tr></thead>
+          <tbody>
+            <tr><td><code>&lt;table&gt;</code></td><td>Створює таблицю</td></tr>
+            <tr><td><code>&lt;tr&gt;</code></td><td>Рядок таблиці</td></tr>
+            <tr><td><code>&lt;th&gt;</code></td><td>Комірка-заголовок (жирна, по центру)</td></tr>
+            <tr><td><code>&lt;td&gt;</code></td><td>Звичайна комірка з даними</td></tr>
+            <tr><td><code>&lt;caption&gt;</code></td><td>Назва таблиці, одразу після <code>&lt;table&gt;</code></td></tr>
+            <tr><td><code>&lt;thead&gt;</code> <code>&lt;tbody&gt;</code> <code>&lt;tfoot&gt;</code></td><td>Шапка, основна частина, підсумок</td></tr>
+            <tr><td><code>colspan="2"</code></td><td>Об'єднати 2 комірки по горизонталі</td></tr>
+            <tr><td><code>rowspan="2"</code></td><td>Об'єднати 2 комірки по вертикалі</td></tr>
+            <tr><td><code>scope="col"</code> / <code>scope="row"</code></td><td>Заголовок стовпця / рядка</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note warn"><b>Типова помилка</b><p>Після <code class="i">colspan</code> або <code class="i">rowspan</code> забули прибрати зайві <code class="i">&lt;td&gt;</code>. Тоді в рядку стає більше комірок, ніж стовпців, і таблиця «їде» вправо. Порахуй: у кожному рядку має виходити однакова кількість стовпців.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ЕТАП 2 -->
+<section id="practice" class="band alt">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Етап 2 · Практика</p>
+      <h2>Спробуй сам.</h2>
+      <p>Спочатку потренуйся тут: пиши ліворуч, результат з'являється праворуч. Коли «Перевірити» покаже всі галочки, перенеси код на GitHub і зроби коміт.</p>
+    </div>
+
+    <div class="stack">
+      <div class="tabs" role="tablist" aria-label="Вправи">
+        <button role="tab" id="t1" aria-selected="true" data-ex="0">Вправа 1</button>
+        <button role="tab" id="t2" aria-selected="false" data-ex="1">Вправа 2</button>
+        <button role="tab" id="t3" aria-selected="false" data-ex="2">Вправа 3</button>
+      </div>
+
+      <div class="task" role="tabpanel">
+        <div class="task-head">
+          <h3 id="taskTitle"></h3>
+          <ol id="taskSteps"></ol>
+        </div>
+        <div class="play">
+          <div><p class="label">Твій код</p><textarea id="editor" spellcheck="false" autocapitalize="off" autocorrect="off" aria-label="Редактор коду"></textarea></div>
+          <div><p class="label">Результат</p><div class="render" id="preview"></div></div>
+        </div>
+        <div class="actions">
+          <button class="btn" id="checkBtn">Перевірити</button>
+          <button class="btn ghost" id="copyEx">Скопіювати мій код</button>
+          <button class="btn ghost" id="resetBtn">Почати заново</button>
+        </div>
+        <ul class="checks" id="checks"></ul>
+        <div class="commit" id="exCommit"></div>
+      </div>
+
+      <h3 style="margin-top:32px">Шлях кожної вправи</h3>
+      <div class="flow">
+        <div class="commit"><div class="row"><span class="pill">1</span><span>Тренуйся тут</span></div><p class="small muted">Пиши код і тисни «Перевірити», доки всі пункти не стануть зеленими.</p></div>
+        <div class="commit"><div class="row"><span class="pill">2</span><span>Створи файл</span></div><p class="small muted"><kbd>Add file</kbd> → <kbd>Create new file</kbd>. Встав каркас із <code class="i">&lt;style&gt;</code>, а в <code class="i">&lt;body&gt;</code> свій код.</p></div>
+        <div class="commit"><div class="row"><span class="pill">3</span><span>Зроби коміт</span></div><p class="small muted">Підпиши коміт назвою вправи і подивись результат за адресою сайту.</p></div>
+      </div>
+      <div class="note warn"><b>Екранна клавіатура «виправляє» код</b><p>Планшет може ставити велику літеру на початку рядка чи замінювати лапки <code class="i">"</code> на «ялинки». Через це <code class="i">colspan="2"</code> перестає працювати. Вимкни <b>автовиправлення</b> та <b>розумну пунктуацію</b> в налаштуваннях клавіатури.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ЕТАП 3 -->
+<section id="task" class="band">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Етап 3 · Самостійна робота</p>
+      <h2>Мій розклад уроків.</h2>
+      <p>У репозиторії <code class="i">tables</code> створи файл <code class="i">schedule.html</code> з розкладом свого класу на тиждень. Працюй невеликими кроками і після кожного роби коміт.</p>
+    </div>
+
+    <div class="stack" style="margin-bottom:32px">
+      <h3>План комітів</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>№</th><th>Що зробити</th><th>Підпис коміту</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Створити <code>schedule.html</code>, вставити шаблон, вписати клас у <code>caption</code></td><td><code>Створено сторінку розкладу</code></td></tr>
+            <tr><td>2</td><td>Заповнити уроки на всі 5 днів</td><td><code>Додано уроки</code></td></tr>
+            <tr><td>3</td><td>Додати велику перерву з <code>colspan</code> і подвійний урок з <code>rowspan</code></td><td><code>Додано об'єднання комірок</code></td></tr>
+            <tr><td>4</td><td>Заповнити підсумок у <code>tfoot</code>: скільки уроків у кожен день</td><td><code>Додано підсумок</code></td></tr>
+            <tr><td>5</td><td>В <code>index.html</code> додати посилання на розклад (код нижче)</td><td><code>Додано посилання на розклад</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="panel">
+        <div class="copyrow"><p class="label" style="margin:0">Шаблон schedule.html</p><button class="btn ghost copy" data-copy="tpl" style="padding:7px 16px;font-size:14px">Скопіювати</button></div>
+        <pre data-src="tpl"></pre>
+        <p class="label" style="margin:8px 0 0">Посилання для index.html</p>
+        <pre data-src="link"></pre>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <p class="label" style="margin:0">Чекліст. Позначай, що вже зроблено</p>
+          <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+          <ul class="todo" id="todo">
+            <li><label><input type="checkbox" id="g1">Файл <code class="i">schedule.html</code> створено в репозиторії <code class="i">tables</code></label></li>
+            <li><label><input type="checkbox" id="g2">Є <code class="i">caption</code> з назвою, наприклад «Розклад 6-А класу»</label></li>
+            <li><label><input type="checkbox" id="g3">Шапка <code class="i">thead</code> з днями тижня і <code class="i">scope="col"</code></label></li>
+            <li><label><input type="checkbox" id="g4">У <code class="i">tbody</code> щонайменше 5 рядків уроків, номер уроку в <code class="i">th scope="row"</code></label></li>
+            <li><label><input type="checkbox" id="g5">Велика перерва на всю ширину через <code class="i">colspan</code></label></li>
+            <li><label><input type="checkbox" id="g6">Подвійний урок через <code class="i">rowspan</code>, зайву комірку прибрано</label></li>
+            <li><label><input type="checkbox" id="g7">Підсумок у <code class="i">tfoot</code></label></li>
+            <li><label><input type="checkbox" id="g8">Щонайменше 5 комітів зі зрозумілими підписами</label></li>
+            <li><label><input type="checkbox" id="g9">Розклад відкривається за адресою …github.io/tables/schedule.html і на нього є посилання з головної</label></li>
+          </ul>
+          <p class="muted small" id="todoNote">Виконано 0 з 9</p>
+        </div>
+        <div class="note"><b>Як здати роботу</b><p>Надішли вчителю два посилання: на сайт <span class="path">https://твій-логін.github.io/tables/schedule.html</span> і на репозиторій <span class="path">https://github.com/твій-логін/tables</span>.</p></div>
+      </div>
+    </div>
+
+    <article class="ex wide" style="margin-top:48px">
+      <div class="info"><h3>Приклад готової роботи</h3><p class="muted">Ось як може виглядати розклад. Не копіюй його, а впиши свої уроки.</p></div>
+      <div class="code"><p class="label">Частина коду (body)</p><pre data-src="sample"></pre></div>
+      <div class="out"><p class="label">Результат на сайті</p><div class="render" data-render="sample"></div></div>
+    </article>
+
+    <div class="stack" style="margin-top:48px">
+      <h3>Як оцінюється робота</h3>
+      <div class="tbl">
+        <table class="grade">
+          <thead><tr><th>Критерій</th><th>Бали</th></tr></thead>
+          <tbody>
+            <tr><td>Правильна будова: <code>table</code>, <code>tr</code>, <code>th</code>, <code>td</code></td><td>2</td></tr>
+            <tr><td>Структура: <code>caption</code>, <code>thead</code>, <code>tbody</code>, <code>tfoot</code></td><td>2</td></tr>
+            <tr><td>Заголовки з <code>scope="col"</code> і <code>scope="row"</code></td><td>1</td></tr>
+            <tr><td>Правильний <code>colspan</code> (перерва на всю ширину)</td><td>2</td></tr>
+            <tr><td>Правильний <code>rowspan</code> (подвійний урок), таблиця не «їде»</td><td>2</td></tr>
+            <tr><td>Щонайменше 5 комітів зі зрозумілими підписами</td><td>1</td></tr>
+            <tr><td>Сайт працює на GitHub Pages, є посилання з index.html</td><td>2</td></tr>
+            <tr><td><b>Разом</b></td><td>12</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ТЕСТ -->
+<section id="quiz" class="band alt">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Фініш · Перевір себе</p>
+      <h2>10 питань.</h2>
+      <p>Сім питань про таблиці і три про GitHub. Обери одну відповідь у кожному питанні, а потім натисни «Перевірити тест» внизу.</p>
+    </div>
+    <form class="quiz" id="quizForm"></form>
+    <div class="actions" style="margin-top:24px">
+      <button class="btn" id="quizBtn" form="quizForm" type="submit">Перевірити тест</button>
+      <button class="btn ghost" id="quizReset" type="button">Пройти ще раз</button>
+    </div>
+    <div class="score" id="score" hidden style="margin-top:24px">
+      <div class="big" id="scoreNum">0 / 10</div>
+      <p class="muted" id="scoreMsg"></p>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">Урок «Таблиці в HTML» · інформатика · робота на планшеті з GitHub і GitHub Pages · за матеріалами vivchai.com.ua</div></footer>
+
+<!-- ======= Джерела коду ======= -->
+<script type="text/plain" id="base"><!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Мої таблиці</title>
+  <style>
+    table { border-collapse: collapse; }
+    th, td { border: 1px solid #999; padding: 6px 10px; }
+    th { background: #eee; }
+  </style>
+</head>
+<body>
+  <h1>Мої таблиці</h1>
+
+</body>
+</html></script>
+
+<script type="text/plain" id="ex1"><h2>Оцінки</h2>
+<table>
+  <tr>
+    <th>Ім'я</th>
+    <th>Оцінка</th>
+  </tr>
+  <tr>
+    <td>Олена</td>
+    <td>11</td>
+  </tr>
+  <tr>
+    <td>Максим</td>
+    <td>9</td>
+  </tr>
+</table></script>
+
+<script type="text/plain" id="ex2"><table>
+  <caption>Оцінки за семестри</caption>
+  <thead>
+    <tr>
+      <th>Предмет</th>
+      <th>I семестр</th>
+      <th>II семестр</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Математика</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>Інформатика</td>
+      <td>12</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>Середній бал</td>
+      <td>11</td>
+      <td>11,5</td>
+    </tr>
+  </tfoot>
+</table></script>
+
+<script type="text/plain" id="ex3"><table>
+  <tr>
+    <th colspan="3">Розклад на понеділок</th>
+  </tr>
+  <tr>
+    <td rowspan="2">Ранок</td>
+    <td>1</td>
+    <td>Математика</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Фізика</td>
+  </tr>
+</table></script>
+
+<script type="text/plain" id="ex4"><table>
+  <tr>
+    <th scope="col">Ім'я</th>
+    <th scope="col">Вік</th>
+    <th scope="col">Місто</th>
+  </tr>
+  <tr>
+    <th scope="row">Олена</th>
+    <td>12</td>
+    <td>Київ</td>
+  </tr>
+  <tr>
+    <th scope="row">Максим</th>
+    <td>13</td>
+    <td>Львів</td>
+  </tr>
+</table></script>
+
+<script type="text/plain" id="tpl"><!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Мій розклад</title>
+  <style>
+    table { border-collapse: collapse; }
+    th, td { border: 1px solid #999; padding: 6px 10px; }
+    th { background: #eee; }
+  </style>
+</head>
+<body>
+  <h1>Мій розклад уроків</h1>
+
+  <table>
+    <caption>Розклад … класу</caption>
+    <thead>
+      <tr>
+        <th scope="col">№</th>
+        <th scope="col">Понеділок</th>
+        <th scope="col">Вівторок</th>
+        <th scope="col">Середа</th>
+        <th scope="col">Четвер</th>
+        <th scope="col">П'ятниця</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+      </tr>
+      <!-- Додай ще рядки для 2, 3, 4… уроків -->
+
+      <!-- Велика перерва на всю ширину -->
+      <tr>
+        <td colspan="6">Велика перерва</td>
+      </tr>
+
+      <!-- Подвійний урок: rowspan="2", а в наступному
+           рядку для цього дня комірку НЕ пишемо -->
+    </tbody>
+    <tfoot>
+      <tr>
+        <th scope="row">Уроків</th>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <p><a href="index.html">← На головну</a></p>
+</body>
+</html></script>
+
+<script type="text/plain" id="link"><p><a href="schedule.html">Мій розклад →</a></p></script>
+
+<script type="text/plain" id="sample"><table>
+  <caption>Розклад 6-А класу</caption>
+  <thead>
+    <tr>
+      <th scope="col">№</th>
+      <th scope="col">Пн</th>
+      <th scope="col">Вт</th>
+      <th scope="col">Ср</th>
+      <th scope="col">Чт</th>
+      <th scope="col">Пт</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Математика</td>
+      <td>Історія</td>
+      <td rowspan="2">Фізкультура</td>
+      <td>Англійська</td>
+      <td>Математика</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Українська</td>
+      <td>Математика</td>
+      <td>Природа</td>
+      <td>Інформатика</td>
+    </tr>
+    <tr>
+      <td colspan="6">Велика перерва</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Англійська</td>
+      <td>Музика</td>
+      <td>Українська</td>
+      <td>Математика</td>
+      <td>Мистецтво</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th scope="row">Уроків</th>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+  </tfoot>
+</table></script>
+
+<script>
+(function(){
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  function hl(src){
+    let s = esc(src);
+    s = s.replace(/&lt;!--[\s\S]*?--&gt;/g, m => '\u0001' + m + '\u0002');
+    s = s.replace(/(&lt;\/?)([a-zA-Z!][a-zA-Z0-9]*)([^&]*?)(\/?&gt;)/g, (m,a,t,attrs,b) => {
+      attrs = attrs.replace(/([a-zA-Z-]+)(=)("[^"]*")/g,'<span class="ta">$1</span>$2<span class="tv">$3</span>');
+      return '<span class="tk">'+a+t+'</span>'+attrs+'<span class="tk">'+b+'</span>';
+    });
+    return s.replace(/\u0001/g,'<span class="tc">').replace(/\u0002/g,'</span>');
+  }
+  const src = id => document.getElementById(id).textContent.replace(/^\n/,'');
+  document.querySelectorAll('pre[data-src]').forEach(p => p.innerHTML = hl(src(p.dataset.src)));
+  document.querySelectorAll('[data-render]').forEach(d => d.innerHTML = src(d.dataset.render));
+
+  function copyText(btn, text, pre){
+    const label = btn.textContent;
+    const done = ()=>{ btn.textContent='Скопійовано'; setTimeout(()=>btn.textContent=label,1800); };
+    const fallback = ()=>{ if(pre){ const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); } btn.textContent='Виділено, скопіюй вручну'; setTimeout(()=>btn.textContent=label,2500); };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch(e){ fallback(); }
+  }
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', ()=>copyText(b, src(b.dataset.copy), document.querySelector('pre[data-src="'+b.dataset.copy+'"]'))));
+
+  // ширина кожного рядка з урахуванням colspan/rowspan
+  function rowWidths(t){
+    const occ = []; const rows = [...t.rows];
+    rows.forEach((tr,r)=>{
+      occ[r] = occ[r] || []; let c = 0;
+      [...tr.cells].forEach(cell=>{
+        while(occ[r][c]) c++;
+        const cs = Math.max(1, cell.colSpan||1), rs = Math.max(1, cell.rowSpan||1);
+        for(let i=0;i<rs;i++){ occ[r+i] = occ[r+i] || []; for(let j=0;j<cs;j++) occ[r+i][c+j] = 1; }
+        c += cs;
+      });
+    });
+    return occ.slice(0, rows.length).map(a => a.length);
+  }
+  const sameWidth = t => { const w = rowWidths(t); return w.length>0 && w.every(x=>x===w[0]); };
+
+  // ---------- Практика ----------
+  const tasks = [
+    { title:'Вправа 1. Таблиця оцінок', file:'exercise1.html', msg:'Вправа 1: базова таблиця',
+      steps:['Створи таблицю <code class="i">&lt;table&gt;</code> з оцінками своїх друзів','Перший рядок — заголовки <code class="i">&lt;th&gt;</code>: Ім\'я, Математика, Інформатика','Додай щонайменше 3 рядки з даними в <code class="i">&lt;td&gt;</code>'],
+      start:'<table>\n  <tr>\n    <th>Ім\'я</th>\n    <th>Математика</th>\n    \n  </tr>\n  <tr>\n    <td>Олена</td>\n    <td>11</td>\n    \n  </tr>\n  \n</table>',
+      checks:[
+        ['Є таблиця table', d => d.querySelector('table')],
+        ['Перший рядок має щонайменше 3 заголовки th', d => { const t=d.querySelector('table'); return t && t.rows[0] && t.rows[0].querySelectorAll('th').length>=3; }],
+        ['Щонайменше 3 рядки з даними td', d => { const t=d.querySelector('table'); return t && [...t.rows].filter(r=>r.querySelector('td')).length>=3; }],
+        ['Усі рядки однакової ширини', d => { const t=d.querySelector('table'); return t && sameWidth(t); }]
+      ]},
+    { title:'Вправа 2. Структура таблиці', file:'exercise2.html', msg:'Вправа 2: структура таблиці',
+      steps:['Зроби таблицю «Мої витрати на тиждень» зі стовпцями День і Сума','Додай назву <code class="i">&lt;caption&gt;</code>','Розділи на <code class="i">&lt;thead&gt;</code>, <code class="i">&lt;tbody&gt;</code> і <code class="i">&lt;tfoot&gt;</code> з рядком «Разом»'],
+      start:'<table>\n  <caption>Мої витрати на тиждень</caption>\n  <thead>\n    <tr>\n      <th>День</th>\n      <th>Сума, грн</th>\n    </tr>\n  </thead>\n  \n</table>',
+      checks:[
+        ['Є назва caption', d => d.querySelector('table > caption')],
+        ['Є шапка thead', d => d.querySelector('table > thead')],
+        ['У tbody щонайменше 3 рядки', d => { const b=d.querySelector('table > tbody'); return b && b.rows.length>=3 && b.querySelector('td'); }],
+        ['Є підсумок tfoot', d => { const f=d.querySelector('table > tfoot'); return f && f.rows.length>=1; }]
+      ]},
+    { title:'Вправа 3. Об\'єднання комірок', file:'exercise3.html', msg:'Вправа 3: colspan і rowspan',
+      steps:['Перший рядок: одна комірка «Гуртки» на 3 стовпці через <code class="i">colspan="3"</code>','Зроби комірку дня, яка займає 2 рядки, через <code class="i">rowspan="2"</code>','Прибери зайві комірки, щоб таблиця не «їхала»'],
+      start:'<table>\n  <tr>\n    <th>Гуртки</th>\n  </tr>\n  <tr>\n    <td>Понеділок</td>\n    <td>15:00</td>\n    <td>Шахи</td>\n  </tr>\n  <tr>\n    <td>Понеділок</td>\n    <td>16:00</td>\n    <td>Футбол</td>\n  </tr>\n</table>',
+      checks:[
+        ['Є комірка з colspan="3"', d => [...d.querySelectorAll('td,th')].some(c=>c.colSpan===3)],
+        ['Є комірка з rowspan="2"', d => [...d.querySelectorAll('td,th')].some(c=>c.rowSpan===2)],
+        ['Немає зайвих комірок: усі рядки однакової ширини', d => { const t=d.querySelector('table'); return t && sameWidth(t); }]
+      ]}
+  ];
+  const ed = document.getElementById('editor'), pv = document.getElementById('preview'),
+        ck = document.getElementById('checks'), tabs = document.querySelectorAll('.tabs button'),
+        cm = document.getElementById('exCommit');
+  let cur = 0; const drafts = tasks.map(t => t.start);
+  function draw(){ pv.innerHTML = ed.value; }
+  function load(i){
+    cur = i; const t = tasks[i];
+    tabs.forEach((b,j)=>b.setAttribute('aria-selected', j===i));
+    document.getElementById('taskTitle').textContent = t.title;
+    document.getElementById('taskSteps').innerHTML = t.steps.map(s=>'<li>'+s+'</li>').join('');
+    cm.innerHTML = '<div class="row"><span>Після перевірки створи файл</span><span class="pill">'+t.file+'</span><span>і зроби коміт</span></div><div class="msg">'+t.msg+'</div>';
+    ed.value = drafts[i]; draw();
+    ck.innerHTML = t.checks.map(c=>'<li><span class="dot">·</span>'+c[0]+'</li>').join('');
+  }
+  ed.addEventListener('input', ()=>{ drafts[cur]=ed.value; draw(); });
+  ed.addEventListener('keydown', e=>{
+    if(e.key==='Tab'){ e.preventDefault(); const s=ed.selectionStart; ed.setRangeText('  ', s, ed.selectionEnd, 'end'); drafts[cur]=ed.value; draw(); }
+  });
+  tabs.forEach(b=>b.addEventListener('click', ()=>load(+b.dataset.ex)));
+  document.getElementById('resetBtn').addEventListener('click', ()=>{ drafts[cur]=tasks[cur].start; load(cur); });
+  document.getElementById('copyEx').addEventListener('click', e=>{
+    const b=e.currentTarget, text=ed.value, label=b.textContent;
+    const fb=()=>{ ed.focus(); ed.select(); b.textContent='Виділено, скопіюй вручну'; setTimeout(()=>b.textContent=label,2500); };
+    try{ navigator.clipboard.writeText(text).then(()=>{ b.textContent='Скопійовано'; setTimeout(()=>b.textContent=label,1800); }, fb); }catch(err){ fb(); }
+  });
+  document.getElementById('checkBtn').addEventListener('click', ()=>{
+    const res = tasks[cur].checks.map(c=>{ let ok=false; try{ ok=!!c[1](pv); }catch(e){} return [c[0],ok]; });
+    const all = res.every(r=>r[1]);
+    ck.innerHTML = res.map(r=>'<li class="'+(r[1]?'yes':'no')+'"><span class="dot">'+(r[1]?'✓':'✕')+'</span>'+r[0]+'</li>').join('')
+      + (all ? '<li class="yes"><span class="dot">★</span><b>Чудово! Тепер перенеси код на GitHub і зроби коміт.</b></li>' : '');
+  });
+  load(0);
+
+  // ---------- Чекліст ----------
+  const boxes = [...document.querySelectorAll('#todo input')];
+  let saved = {}; try{ saved = JSON.parse(localStorage.getItem('tables-gh-todo')||'{}'); }catch(e){}
+  function upd(){
+    const n = boxes.filter(b=>b.checked).length;
+    document.getElementById('bar').style.width = (n/boxes.length*100)+'%';
+    document.getElementById('todoNote').textContent = n===boxes.length ? 'Усе готово! Надсилай посилання вчителю.' : 'Виконано '+n+' з '+boxes.length;
+  }
+  boxes.forEach(b=>{ b.checked=!!saved[b.id]; b.addEventListener('change',()=>{ saved[b.id]=b.checked; try{ localStorage.setItem('tables-gh-todo',JSON.stringify(saved)); }catch(e){} upd(); }); });
+  upd();
+
+  // ---------- Тест ----------
+  const Q = [
+    { q:'Який тег створює рядок таблиці?', o:['<td>','<tr>','<th>','<row>'], a:1, w:'tr (table row) — рядок. Усередині нього лежать комірки.'},
+    { q:'Чим <th> відрізняється від <td>?', o:['Нічим','<th> — комірка-заголовок','<th> — нова таблиця','<th> — рядок'], a:1, w:'th — заголовок: браузер робить його жирним і розміщує по центру.'},
+    { q:'Який тег задає назву таблиці?', o:['<title>','<h1>','<caption>','<name>'], a:2, w:'caption пишеться одразу після <table> і підписує таблицю.'},
+    { q:'Що робить атрибут colspan="3"?', o:['Об\'єднує 3 комірки по горизонталі','Об\'єднує 3 комірки по вертикалі','Додає 3 рядки','Робить 3 стовпці жирними'], a:0, w:'colspan розтягує комірку вправо на кілька стовпців.'},
+    { q:'Що не так у цьому коді, якщо таблиця має 3 стовпці?', code:'<tr>\n  <td colspan="2">Фізкультура</td>\n  <td>9:00</td>\n  <td>Зал</td>\n</tr>', o:['Треба писати rowspan','Зайва комірка: рядок займає 4 стовпці','Не вистачає <th>','Усе правильно'], a:1, w:'colspan="2" вже займає 2 стовпці, тому поруч має бути лише одна td.'},
+    { q:'У яку частину таблиці кладуть підсумковий рядок «Разом»?', o:['<thead>','<tbody>','<tfoot>','<caption>'], a:2, w:'tfoot — нижня, підсумкова частина таблиці.'},
+    { q:'Що означає scope="row" у тезі <th>?', o:['Заголовок рядка','Заголовок стовпця','Об\'єднати рядок','Новий рядок'], a:0, w:'scope="row" — заголовок рядка, scope="col" — заголовок стовпця.'},
+    { q:'Як створити новий файл у репозиторії на GitHub?', o:['Settings → Pages','Add file → Create new file','Commits → New','Actions → Run'], a:1, w:'Кнопка Add file → Create new file, потім назва файлу і коміт.'},
+    { q:'Де перевірити, що GitHub Pages уже оновив сайт після коміту?', o:['У вкладці Actions','У файлі README','У вкладці Issues','У полі Commit message'], a:0, w:'Зелена галочка у вкладці Actions означає, що сайт оновлено.'},
+    { q:'За якою адресою відкриється schedule.html з репозиторію tables?', o:['github.com/tables/schedule','логін.github.io/tables/schedule.html','tables.com/schedule.html','github.io/schedule.html'], a:1, w:'Адреса сайту: логін.github.io/назва-репозиторію/назва-файлу.'}
+  ];
+  const form = document.getElementById('quizForm');
+  form.innerHTML = Q.map((x,i)=>
+    '<fieldset class="q" id="q'+i+'"><legend><span class="qt">'+esc(x.q)+'</span></legend>'
+    + (x.code ? '<pre>'+hl(x.code)+'</pre>' : '')
+    + '<div class="opts">' + x.o.map((o,j)=>'<label><input type="radio" name="q'+i+'" id="q'+i+'o'+j+'" value="'+j+'"><code>'+esc(o)+'</code></label>').join('') + '</div>'
+    + '<p class="why">'+esc(x.w)+'</p></fieldset>'
+  ).join('');
+  form.querySelectorAll('.opts code').forEach(c=>{ if(!/[<=\/]/.test(c.textContent)){ const s=document.createElement('span'); s.textContent=c.textContent; c.replaceWith(s);} });
+
+  form.addEventListener('submit', e=>{
+    e.preventDefault(); let n=0;
+    Q.forEach((x,i)=>{
+      const fs = document.getElementById('q'+i); fs.classList.add('done');
+      const labels = fs.querySelectorAll('label');
+      labels.forEach((l,j)=>{ l.classList.remove('right','wrong'); if(j===x.a) l.classList.add('right'); });
+      const sel = fs.querySelector('input:checked');
+      if(sel){ if(+sel.value===x.a) n++; else labels[+sel.value].classList.add('wrong'); }
+    });
+    const sc = document.getElementById('score'); sc.hidden=false;
+    document.getElementById('scoreNum').textContent = n+' / 10';
+    document.getElementById('scoreMsg').textContent = n===10 ? 'Ідеально! Ти справжній майстер таблиць і комітів.' : n>=8 ? 'Дуже добре! Переглянь пояснення до помилок.' : n>=5 ? 'Непогано. Повернись до етапу «Знайомство» і спробуй ще раз.' : 'Перечитай урок і пройди тест ще раз. У тебе вийде!';
+    sc.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+  document.getElementById('quizReset').addEventListener('click', ()=>{
+    form.reset(); form.querySelectorAll('.q').forEach(q=>q.classList.remove('done'));
+    form.querySelectorAll('label').forEach(l=>l.classList.remove('right','wrong'));
+    document.getElementById('score').hidden=true;
+    document.getElementById('q0').scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+
+</body></html>
